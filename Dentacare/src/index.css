@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: "Inter", sans-serif;
+  background: #93b8c7;
+}
+
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+::selection {
+  background: #004b79;
+  color: white;
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+@keyframes floatOne {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-18px) rotate(2deg);
+  }
+}
+
+@keyframes floatTwo {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(2deg);
+  }
+
+  50% {
+    transform: translateY(-14px) rotate(-2deg);
+  }
+}
+
+@keyframes floatThree {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(1deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(-2deg);
+  }
+}
+
+@keyframes floatFour {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(-1deg);
+  }
+
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hide Scrollbar */
+/* Hide scrollbar but keep smooth scrolling */
+
+.custom-scrollbar {
+  scroll-behavior: smooth;
+  overflow-y: auto;
+
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Edge, Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  display: none;
+}
+
+.custom-scrollbar {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  display: none;
+}
+
+.custom-scrollbar {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+.custom-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  scroll-behavior: smooth;
+}
+
+.custom-scroll::-webkit-scrollbar {
+  display: none;
+}
