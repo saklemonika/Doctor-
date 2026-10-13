@@ -17,13 +17,13 @@ import Contact from "./components/Contact";
 import WhyChoose from "./components/WhyChoose";
 import Appointment from "./components/Appointment";
 
-import Login from "./admin/pages/Login";
-import Dashboard from "./admin/pages/Dashboard";
+import Login from "./Admin/pages/Login";
+import Dashboard from "./Admin/pages/Dashboard";
 import AdminServices from "./Admin/pages/AdminServices";
-import Contacts from "./admin/pages/Contacts";
-import Appointments from "./admin/pages/Appointments";
-import Doctors from "./admin/pages/Doctors";
-import ProtectedAdmin from "./admin/ProtectedAdmin";
+import Contacts from "./Admin/pages/Contacts";
+import Appointments from "./Admin/pages/Appointments";
+import Doctors from "./Admin/pages/Doctors";
+import ProtectedAdmin from "./Admin/ProtectedAdmin";
 import ALLTeam from "./Admin/pages/ALLTeam";
 
 import ScrollToTop from "./components/ScrollToTop";
