@@ -17,14 +17,14 @@ import Contact from "./components/Contact";
 import WhyChoose from "./components/WhyChoose";
 import Appointment from "./components/Appointment";
 
-import AdminLogin from "./admin/pages/Login";
+import Login from "./admin/pages/Login";
 import Dashboard from "./admin/pages/Dashboard";
-import AdminServices from "./admin/pages/Services";
+import AdminServices from "./Admin/pages/AdminServices";
 import Contacts from "./admin/pages/Contacts";
 import Appointments from "./admin/pages/Appointments";
 import Doctors from "./admin/pages/Doctors";
 import ProtectedAdmin from "./admin/ProtectedAdmin";
-import TeamALL from "./Admin/pages/ALLTeam";
+import ALLTeam from "./Admin/pages/ALLTeam";
 
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -245,7 +245,7 @@ export default function App() {
         />
 
         {/* ADMIN ROUTES */}
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/login" element={<Login />} />
 
         <Route
           path="/admin"
@@ -257,7 +257,7 @@ export default function App() {
         />
 
         <Route
-          path="/admin/services"
+          path="/admin/AminServices"
           element={
             <ProtectedAdmin>
               <AdminServices />
@@ -292,10 +292,10 @@ export default function App() {
           }
         />
         <Route
-          path="/admin/TeamALL"
+          path="/admin/ALLTeam"
           element={
             <ProtectedAdmin>
-              <TeamALL />
+              <ALLTeam/>
             </ProtectedAdmin>
           }
         />

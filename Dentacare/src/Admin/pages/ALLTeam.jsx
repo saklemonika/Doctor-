@@ -4,7 +4,7 @@ import { Trash2, Plus, Pencil, X, Upload } from "lucide-react";
 
 const API_URL = "http://localhost:5000/api/team";
 
-export default function TeamALL() {
+export default function ALLTeam() {
   const [team, setTeam] = useState([]);
   const [openForm, setOpenForm] = useState(false);
   const [editId, setEditId] = useState(null);

@@ -12,9 +12,9 @@ import {
 
 const menus = [
   { name: "Dashboard", path: "/admin", icon: LayoutDashboard },
-  { name: "Services", path: "/admin/services", icon: Stethoscope },
-  { name: "Doctors", path: "/admin/doctors", icon: Stethoscope },
-  { name: "Team", path: "/admin/TeamALL", icon: UserRound },
+  { name: "Services", path: "/admin/AminServices", icon: Stethoscope },
+  { name: "Doctors", path: "/admin/Doctors", icon: Stethoscope },
+  { name: "Team", path: "/admin/ALLTeam", icon: UserRound },
   { name: "Contacts", path: "/admin/contacts", icon: MessageSquare },
   { name: "Appointments", path: "/admin/appointments", icon: CalendarCheck },
 ];
