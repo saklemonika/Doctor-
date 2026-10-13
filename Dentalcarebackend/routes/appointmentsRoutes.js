@@ -4,7 +4,7 @@ const {
   getAppointments,
   confirmAppointment,
   deleteAppointment,
-} = require("../controllers/appointmentsController");
+} = require("../controllers/AppointmentsController");
 
 
 
