@@ -26,6 +26,8 @@ export default function Login() {
 
     try {
       const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      console.log("Attempting login to:", `${API_URL}/api/auth/login`);
+
       const res = await fetch(`${API_URL}/api/auth/login`, {
         method: "POST",
         headers: {
@@ -35,6 +37,7 @@ export default function Login() {
       });
 
       const data = await res.json();
+      console.log("Login response:", data);
 
       if (data.success) {
         localStorage.setItem("adminToken", data.token);
@@ -44,7 +47,8 @@ export default function Login() {
         setMessage(data.message || "Invalid email or password");
       }
     } catch (error) {
-      setMessage("Login failed. Please try again.");
+      console.error("Login error:", error);
+      setMessage("Login failed. Please check your connection and try again.");
     } finally {
       setLoading(false);
     }
