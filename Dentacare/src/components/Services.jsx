@@ -7,8 +7,9 @@ import {
   Clock3,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { API_URL as BASE_URL } from "../config";
 
-const API_URL = "http://localhost:5000/api/services";
+const API_URL = `${BASE_URL}/api/services`;
 
 export default function Services() {
   const [services, setServices] = useState([]);

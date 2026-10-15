@@ -6,6 +6,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { API_URL as BASE_URL } from "../../config";
 
 export default function Contacts() {
   const [contacts, setContacts] = useState([]);
@@ -22,7 +23,7 @@ export default function Contacts() {
   const getContacts = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/contacts"
+        `${BASE_URL}/api/contacts`
       );
 
       const data = await res.json();
@@ -43,7 +44,7 @@ export default function Contacts() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/contacts/${id}`,
+        `${BASE_URL}/api/contacts/${id}`,
         {
           method: "DELETE",
         }

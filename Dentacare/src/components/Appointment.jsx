@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { ArrowRight, Pause, ChevronRight } from "lucide-react";
+import { API_URL as BASE_URL } from "../config";
 
 export default function Appointment() {
   const schedules = [
@@ -93,7 +94,7 @@ export default function Appointment() {
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const API_URL = "http://localhost:5000/api/appointments";
+  const API_URL = `${BASE_URL}/api/appointments`;
 
   const handleChange = (e) => {
     setFormData({

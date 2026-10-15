@@ -7,6 +7,7 @@ import {
   Users,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { API_URL as BASE_URL } from "../../config";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -47,26 +48,26 @@ export default function Dashboard() {
   const getDashboardData = async () => {
     try {
       const serviceRes = await fetch(
-        "http://localhost:5000/api/services"
+        `${BASE_URL}/api/services`
       );
 
       const serviceData = await serviceRes.json();
 
       const appointmentRes = await fetch(
-        "http://localhost:5000/api/appointments"
+        `${BASE_URL}/api/appointments`
       );
 
       const appointmentData =
         await appointmentRes.json();
 
       const contactRes = await fetch(
-        "http://localhost:5000/api/contacts"
+        `${BASE_URL}/api/contacts`
       );
 
       const contactData = await contactRes.json();
 
       const teamRes = await fetch(
-        "http://localhost:5000/api/team"
+        `${BASE_URL}/api/team`
       );
 
       const teamData = await teamRes.json();

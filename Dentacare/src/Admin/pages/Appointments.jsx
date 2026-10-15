@@ -7,6 +7,7 @@ import {
   Mail,
 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { API_URL as BASE_URL } from "../../config";
 
 export default function Appointments() {
   const [appointments, setAppointments] = useState([]);
@@ -22,7 +23,7 @@ export default function Appointments() {
   const getAppointments = async () => {
     try {
       const res = await fetch(
-        "http://localhost:5000/api/appointments"
+        `${BASE_URL}/api/appointments`
       );
 
       const data = await res.json();
@@ -37,7 +38,7 @@ export default function Appointments() {
   const confirmAppointment = async (id) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/appointments/confirm/${id}`,
+        `${BASE_URL}/api/appointments/confirm/${id}`,
         {
           method: "PUT",
         }
@@ -69,7 +70,7 @@ export default function Appointments() {
 
     try {
       const res = await fetch(
-        `http://localhost:5000/api/appointments/${id}`,
+        `${BASE_URL}/api/appointments/${id}`,
         {
           method: "DELETE",
         }

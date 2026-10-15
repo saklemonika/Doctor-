@@ -8,6 +8,7 @@ import {
   Mail,
   MessageSquare,
 } from "lucide-react";
+import { API_URL as BASE_URL } from "../config";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -29,7 +30,7 @@ export default function Contact() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/contacts",
+        `${BASE_URL}/api/contacts`,
         {
           method: "POST",
           headers: {

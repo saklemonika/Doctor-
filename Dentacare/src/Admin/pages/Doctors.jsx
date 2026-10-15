@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { Trash2, Plus, Pencil, X, Upload } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { API_URL as BASE_URL } from "../../config";
 
-const API_URL = "http://localhost:5000/api/doctors";
+const API_URL = `${BASE_URL}/api/doctors`;
 
 export default function Doctors() {
   const [doctors, setDoctors] = useState([]);

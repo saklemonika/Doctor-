@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL as BASE_URL } from "../config";
 
 export default function Doctor() {
   const [doctors, setDoctors] = useState([]);
 
   const getDoctors = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/doctors");
+      const res = await fetch(`${BASE_URL}/api/doctors`);
       const data = await res.json();
 
       if (data.success) {

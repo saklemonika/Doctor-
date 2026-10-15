@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { Trash2, Plus, Pencil, X, Upload } from "lucide-react";
+import { API_URL as BASE_URL } from "../../config";
 
-const API_URL = "http://localhost:5000/api/team";
+const API_URL = `${BASE_URL}/api/team`;
 
 export default function ALLTeam() {
   const [team, setTeam] = useState([]);

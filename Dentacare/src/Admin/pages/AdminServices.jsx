@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import AdminLayout from "../components/AdminLayout";
 import { Trash2, Plus, Pencil, X, Upload } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { API_URL as BASE_URL } from "../../config";
 
-const API_URL = "http://localhost:5000/api/services";
+const API_URL = `${BASE_URL}/api/services`;
 
 export default function Services() {
   const [services, setServices] = useState([]);

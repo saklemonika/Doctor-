@@ -10,6 +10,7 @@ export default function Login() {
   });
 
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setForm({
@@ -18,14 +19,34 @@ export default function Login() {
     });
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setMessage("");
 
-    if (form.email === "admin@gmail.com" && form.password === "123456") {
-      localStorage.setItem("adminToken", "fake_token");
-      navigate("/admin");
-    } else {
-      setMessage("Invalid email or password");
+    try {
+      const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+      const res = await fetch(`${API_URL}/api/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        localStorage.setItem("adminToken", data.token);
+        localStorage.setItem("adminData", JSON.stringify(data.admin));
+        navigate("/admin");
+      } else {
+        setMessage(data.message || "Invalid email or password");
+      }
+    } catch (error) {
+      setMessage("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -65,9 +86,10 @@ export default function Login() {
 
           <button
             type="submit"
-            className="w-full rounded-2xl bg-[#063c40] py-3 font-semibold text-white"
+            disabled={loading}
+            className="w-full rounded-2xl bg-[#063c40] py-3 font-semibold text-white disabled:opacity-50"
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>

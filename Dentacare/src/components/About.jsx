@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL as BASE_URL } from "../config";
 
 
 export default function About() {
@@ -24,7 +25,7 @@ export default function About() {
 
   const getTeam = async () => {
     try {
-      const res = await fetch("http://localhost:5000/api/team");
+      const res = await fetch(`${BASE_URL}/api/team`);
       const data = await res.json();
       setTeam(data.data || []);
     } catch (error) {
