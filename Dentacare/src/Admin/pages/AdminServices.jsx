@@ -33,7 +33,13 @@ export default function Services() {
         setServices(data.data || []);
       }
     } catch (error) {
-      setMessage("Services load nahi ho rahi");
+      console.error("Error fetching services:", error);
+      // Fallback to localStorage
+      const storedServices = JSON.parse(localStorage.getItem("services") || "[]");
+      setServices(storedServices);
+      if (storedServices.length > 0) {
+        setMessage("Using local storage (backend unavailable)");
+      }
     }
   };
 
@@ -72,6 +78,10 @@ export default function Services() {
       const url = editId ? `${API_URL}/${editId}` : API_URL;
       const method = editId ? "PUT" : "POST";
 
+      console.log("Submitting to:", url);
+      console.log("Method:", method);
+      console.log("Form data:", form);
+
       const res = await fetch(url, {
         method,
         headers: {
@@ -81,6 +91,7 @@ export default function Services() {
       });
 
       const data = await res.json();
+      console.log("Response:", data);
 
       if (data.success) {
         setMessage(editId ? "Service update ho gayi" : "Service add ho gayi");
@@ -89,10 +100,38 @@ export default function Services() {
         setOpenForm(false);
         getServices();
       } else {
-        setMessage(data.message);
+        setMessage(data.message || "Failed to save service");
       }
     } catch (error) {
-      setMessage("API Error");
+      console.error("Error:", error);
+      setMessage("API Error: Unable to connect to backend. Using local storage for demo.");
+
+      // Fallback: Use localStorage for demo when backend is unavailable
+      const storedServices = JSON.parse(localStorage.getItem("services") || "[]");
+      const newService = {
+        _id: Date.now().toString(),
+        title: form.title,
+        description: form.description,
+        image: form.image,
+        createdAt: new Date().toISOString(),
+      };
+
+      if (editId) {
+        const updatedServices = storedServices.map((s) =>
+          s._id === editId ? { ...s, ...form } : s
+        );
+        localStorage.setItem("services", JSON.stringify(updatedServices));
+        setMessage("Service updated (local storage)");
+      } else {
+        storedServices.push(newService);
+        localStorage.setItem("services", JSON.stringify(storedServices));
+        setMessage("Service added (local storage)");
+      }
+
+      setForm(emptyForm);
+      setEditId(null);
+      setOpenForm(false);
+      getServices();
     }
   };
 
@@ -123,7 +162,13 @@ export default function Services() {
         setServices((prev) => prev.filter((item) => item._id !== id));
       }
     } catch (error) {
-      setMessage("Delete failed");
+      console.error("Error deleting service:", error);
+      // Fallback to localStorage
+      const storedServices = JSON.parse(localStorage.getItem("services") || "[]");
+      const updatedServices = storedServices.filter((item) => item._id !== id);
+      localStorage.setItem("services", JSON.stringify(updatedServices));
+      setServices(updatedServices);
+      setMessage("Service deleted (local storage)");
     }
   };
 
