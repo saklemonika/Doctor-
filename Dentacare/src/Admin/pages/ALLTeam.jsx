@@ -26,7 +26,9 @@ export default function ALLTeam() {
       const data = await res.json();
       setTeam(data.data || []);
     } catch (error) {
-      setMessage("Team load nahi ho rahi");
+      console.error("Error fetching team:", error);
+      const storedTeam = JSON.parse(localStorage.getItem("team") || "[]");
+      setTeam(storedTeam);
     }
   };
 
@@ -81,7 +83,33 @@ export default function ALLTeam() {
         setMessage(data.message || "Team add nahi ho rahi");
       }
     } catch (error) {
-      setMessage("API Error");
+      console.error("Error:", error);
+      const storedTeam = JSON.parse(localStorage.getItem("team") || "[]");
+      const newMember = {
+        _id: Date.now().toString(),
+        name: form.name,
+        role: form.role,
+        description: form.description,
+        image: form.image,
+        createdAt: new Date().toISOString(),
+      };
+
+      if (editId) {
+        const updatedTeam = storedTeam.map((t) =>
+          t._id === editId ? { ...t, ...form } : t
+        );
+        localStorage.setItem("team", JSON.stringify(updatedTeam));
+        setMessage("Team member updated (local storage)");
+      } else {
+        storedTeam.push(newMember);
+        localStorage.setItem("team", JSON.stringify(storedTeam));
+        setMessage("Team member added (local storage)");
+      }
+
+      setForm(emptyForm);
+      setEditId(null);
+      setOpenForm(false);
+      getTeam();
     }
   };
 
@@ -113,7 +141,12 @@ export default function ALLTeam() {
         setTeam((prev) => prev.filter((item) => item._id !== id));
       }
     } catch (error) {
-      setMessage("Delete failed");
+      console.error("Error deleting team member:", error);
+      const storedTeam = JSON.parse(localStorage.getItem("team") || "[]");
+      const updatedTeam = storedTeam.filter((item) => item._id !== id);
+      localStorage.setItem("team", JSON.stringify(updatedTeam));
+      setTeam(updatedTeam);
+      setMessage("Team member deleted (local storage)");
     }
   };
 

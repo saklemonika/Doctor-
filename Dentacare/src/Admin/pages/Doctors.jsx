@@ -33,7 +33,9 @@ export default function Doctors() {
         setDoctors(data.data || []);
       }
     } catch (error) {
-      setMessage("Doctors load nahi ho rahe");
+      console.error("Error fetching doctors:", error);
+      const storedDoctors = JSON.parse(localStorage.getItem("doctors") || "[]");
+      setDoctors(storedDoctors);
     }
   };
 
@@ -89,7 +91,32 @@ export default function Doctors() {
         setMessage(data.message);
       }
     } catch (error) {
-      setMessage("API Error");
+      console.error("Error:", error);
+      const storedDoctors = JSON.parse(localStorage.getItem("doctors") || "[]");
+      const newDoctor = {
+        _id: Date.now().toString(),
+        name: form.name,
+        role: form.role,
+        image: form.image,
+        createdAt: new Date().toISOString(),
+      };
+
+      if (editId) {
+        const updatedDoctors = storedDoctors.map((d) =>
+          d._id === editId ? { ...d, ...form } : d
+        );
+        localStorage.setItem("doctors", JSON.stringify(updatedDoctors));
+        setMessage("Doctor updated (local storage)");
+      } else {
+        storedDoctors.push(newDoctor);
+        localStorage.setItem("doctors", JSON.stringify(storedDoctors));
+        setMessage("Doctor added (local storage)");
+      }
+
+      setForm(emptyForm);
+      setEditId(null);
+      setOpenForm(false);
+      getDoctors();
     }
   };
 
@@ -120,7 +147,12 @@ export default function Doctors() {
         setDoctors((prev) => prev.filter((item) => item._id !== id));
       }
     } catch (error) {
-      setMessage("Delete failed");
+      console.error("Error deleting doctor:", error);
+      const storedDoctors = JSON.parse(localStorage.getItem("doctors") || "[]");
+      const updatedDoctors = storedDoctors.filter((item) => item._id !== id);
+      localStorage.setItem("doctors", JSON.stringify(updatedDoctors));
+      setDoctors(updatedDoctors);
+      setMessage("Doctor deleted (local storage)");
     }
   };
 

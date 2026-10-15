@@ -92,6 +92,19 @@ export default function Dashboard() {
         "Dashboard data error:",
         error
       );
+
+      // Fallback to localStorage
+      const services = JSON.parse(localStorage.getItem("services") || "[]");
+      const doctors = JSON.parse(localStorage.getItem("doctors") || "[]");
+      const team = JSON.parse(localStorage.getItem("team") || "[]");
+      const contacts = JSON.parse(localStorage.getItem("contacts") || "[]");
+
+      setStats({
+        services: services.length,
+        appointments: 0, // Appointments not stored in localStorage
+        contacts: contacts.length,
+        team: team.length,
+      });
     }
   };
 
