@@ -57,7 +57,9 @@ export default function Services() {
         }
       } catch (error) {
         console.log("Services fetch error:", error);
-        setServices([]);
+        // Fallback to localStorage
+        const storedServices = JSON.parse(localStorage.getItem("services") || "[]");
+        setServices(storedServices);
       } finally {
         setLoading(false);
       }

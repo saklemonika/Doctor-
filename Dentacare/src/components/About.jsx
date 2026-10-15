@@ -30,6 +30,9 @@ export default function About() {
       setTeam(data.data || []);
     } catch (error) {
       console.log("Team fetch error:", error);
+      // Fallback to localStorage
+      const storedTeam = JSON.parse(localStorage.getItem("team") || "[]");
+      setTeam(storedTeam);
     }
   };
 

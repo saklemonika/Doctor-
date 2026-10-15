@@ -15,6 +15,9 @@ export default function Doctor() {
       }
     } catch (error) {
       console.log("Doctors API Error:", error);
+      // Fallback to localStorage
+      const storedDoctors = JSON.parse(localStorage.getItem("doctors") || "[]");
+      setDoctors(storedDoctors);
     }
   };
 
